@@ -6,24 +6,25 @@ import sys
 import time
 from datetime import datetime
 
-product = "Moleskin Field Shirt"
-style = "Light Blue"
-size = "Large"
-mainUrl = "http://www.supremenewyork.com/shop/all/shirts"
+product = "Work Pant"
+
+style = "Pink"
+size = "32"
+mainUrl = "http://www.supremenewyork.com/shop/all/pants"
 baseUrl = "http://supremenewyork.com"
 checkoutUrl = "https://www.supremenewyork.com/checkout"
-namefield = "Test Test"
-emailfield = "Test@example.com"
-phonefield = "5555555555"
-addressfield = "1600 Pennsylvania Avenue NW"
-cityfield = "Washington"
-zipfield = "20500"
+namefield = "Donald Trump"
+emailfield = "trump@trump.com"
+phonefield = "0000000000"
+addressfield = "1 Pennsylvania rd"
+cityfield = "Washington DC"
+zipfield = "00000"
 statefield = "DC"
 cctypefield = "Mastercard"  # "master" "visa" "american_express"
-ccnumfield = "5274576954806318"  # Randomly Generated Data (aka, this isn't mine)
-ccmonthfield = "06"  # Randomly Generated Data (aka, this isn't mine)
-ccyearfield = "2019"  # Randomly Generated Data (aka, this isn't mine)
-cccvcfield = "800"  # Randomly Generated Data (aka, this isn't mine)
+ccnumfield = "0000000000000000"  # Randomly Generated Data (aka, this isn't mine)
+ccmonthfield = "00"  # Randomly Generated Data (aka, this isn't mine)
+ccyearfield = "2121"  # Randomly Generated Data (aka, this isn't mine)
+cccvcfield = "999"  # Randomly Generated Data (aka, this isn't mine)
 
 
 def find():
@@ -57,15 +58,15 @@ def buy(l):
     prdlink = baseUrl + l
     
     driver.get(prdlink)
-    select = Select(driver.find_element_by_id("size"))
-    select.select_by_visible_text(size)
+    #select = Select(driver.find_element_by_id("size"))
+    #select.select_by_visible_text(size)
     
     
     driver.find_element_by_name("commit").click()
     driver.find_element_by_link_text("checkout now").click()
     driver.find_element_by_id("order_billing_name").send_keys(namefield)
     driver.find_element_by_id("order_email").send_keys(emailfield)
-    driver.find_element_by_id("order_tl").send_keys(phonefield)
+    driver.find_element_by_id("order_tel").send_keys(phonefield)
     driver.find_element_by_id("bo").send_keys(addressfield)
     driver.find_element_by_id("order_billing_city").send_keys(cityfield)
     driver.find_element_by_id("order_billing_zip").send_keys(zipfield)
@@ -88,7 +89,8 @@ def buy(l):
    # This line commented out to prevent stupid people from buying something by mistake. Uncomment only if you know what you are doing.
    # driver.find_element_by_name("commit").click()  
     
-    
+    t1 = time.time()
+    print("took " + str(t1-t0) + " to check out")
     print("Process payment clicked, rest is up to supreme.")
     sys.exit(0)
 
@@ -102,6 +104,7 @@ print ("Current time is " + str(datetime.now().time()))
 go = input("Type go to begin\n")
 
 while (go == "go"):
+    t0 = time.time()
     find()
     print("on try number" + str(i))
     i=i+1
